@@ -10,7 +10,28 @@ function [p1, p2] = goldbach(n)
 %        [  5 281]
 %        [107 179]
 %        [137 149]
-p1 = n;
-p2 = n;
+if n - floor(n) > 0
+    error('input shoud be an integer')
+end
+
+if mod(n,2) == 1
+    error('input should be an even number')
+else
+    pairMat = nan(n,2); % (:,1) for p1, (:,2) for p2
+    for ti = 2 : n-2
+        if isprime(ti)
+            pairMat(ti,1) = ti;
+            if isprime(n-ti)
+                pairMat(ti,2) = n-ti;
+            end
+        end
+    end
+end
+gcInd = find(isfinite(sum(pairMat,2))); % index of Goldbach conjecture, having no Nan in both columns
+selInd = randi(length(gcInd)); % selected index
+p1 = pairMat(gcInd(selInd),1);
+p2 = pairMat(gcInd(selInd),2);
+% p1 = n;
+% p2 = n;
 end
 
