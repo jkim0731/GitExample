@@ -16,7 +16,7 @@ function t = triangle(n)
 % Input  n = 4
 % Output t is 10
 
-t = n;
+t = sum(1:n);
 
 end
 
